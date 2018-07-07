@@ -1,12 +1,66 @@
 import React, { Component } from 'react';
+import AddColorForm from './AddColorForm';
+import ColorList from './ColorList';
+import {v4} from 'uuid';
+//import '../stylesheets/App.scss';
 
 class App extends Component {
-    render(){
-        return(
-            <div>
-                <h1>Hello Pavel Rogovin. How are you?</h1>
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            colors: []
+        }
+        this.addColor = this.addColor.bind(this)
+        this.rateColor = this.rateColor.bind(this)
+        this.removeColor = this.removeColor.bind(this)
+    }
+
+    addColor(title, color) {
+        this.setState(prevState => ({
+            colors: [
+                ...prevState.colors,
+                {
+                    id: v4(),
+                    title,
+                    color,
+                    rating: 0
+                }
+            ]
+        }))
+    }
+
+    rateColor(id, rating) {
+        this.setState(prevState => ({
+            colors: prevState.colors.map(color =>
+                (color.id !== id) ?
+                    color :
+                    {
+                        ...color,
+                        rating
+                    }
+            )
+        }))
+    }
+
+    removeColor(id) {
+        this.setState(prevState => ({
+          colors: prevState.colors.filter(color => color.id !== id)
+        }))
+    }
+
+    render() {
+        const { addColor, rateColor, removeColor } = this
+        const { colors } = this.state
+        return (
+            <div className="app">
+                <AddColorForm onNewColor={addColor} />
+                <ColorList colors={colors}
+                           onRate={rateColor}
+                           onRemove={removeColor} />
             </div>
         )
     }
 }
+
 export default App;

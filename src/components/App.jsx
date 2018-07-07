@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AddColorForm from './AddColorForm';
 import ColorList from './ColorList';
 import {v4} from 'uuid';
-//import '../stylesheets/App.scss';
+import '../stylesheets/App.scss';
 
 class App extends Component {
 

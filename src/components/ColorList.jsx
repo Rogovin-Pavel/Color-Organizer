@@ -1,7 +1,7 @@
 import React from 'react';
 import Color from './Color';
 import PropTypes from 'prop-types';
-//import '../stylesheets/ColorList.scss';
+import '../stylesheets/ColorList.scss';
 
 const ColorList = ({ colors=[], onRate=f=>f, onRemove=f=>f }) =>
     <div className="color-list">
